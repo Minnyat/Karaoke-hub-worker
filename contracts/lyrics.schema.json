@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "karaokeforge/lyrics.schema.json",
+  "title": "KaraokeForge Lyrics v1",
+  "description": "Nội dung file lyrics_raw.json / lyrics_aligned.json / lyrics_edited.json trong outputs/{job_id}/. Đơn vị thời gian: giây (float). Nguồn sự thật cho LyricsSegment — web/types/index.ts và worker phải khớp file này.",
+  "type": "array",
+  "items": { "$ref": "#/definitions/segment" },
+  "definitions": {
+    "segment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end", "text", "words"],
+      "properties": {
+        "start": { "type": "number", "minimum": 0 },
+        "end": { "type": "number", "minimum": 0 },
+        "text": { "type": "string" },
+        "words": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/word" }
+        }
+      }
+    },
+    "word": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end", "word", "confidence"],
+      "properties": {
+        "start": { "type": "number", "minimum": 0 },
+        "end": { "type": "number", "minimum": 0 },
+        "word": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

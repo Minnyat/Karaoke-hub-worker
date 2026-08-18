@@ -1,0 +1,11 @@
+[project]
+name = "karaokeforge"
+version = "0.1.0"
+description = "KaraokeForge Colab worker — tách nhạc, align lời, render video karaoke"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+include = ["karaokeforge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "karaokeforge/job.schema.json",
+  "title": "KaraokeForge Job v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "status", "created_at", "updated_at", "attempts",
+    "input", "config", "progress", "checkpoints", "output", "error"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^job_[a-z0-9]{8}$" },
+    "status": { "enum": ["pending", "processing", "completed", "failed"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "attempts": { "type": "integer", "minimum": 0 },
+
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audio_file_id", "audio_filename", "audio_duration",
+        "language", "has_lyrics_input", "lyrics_file_id", "upload_folder_id"
+      ],
+      "properties": {
+        "audio_file_id": { "type": "string" },
+        "audio_filename": { "type": "string" },
+        "audio_duration": { "type": ["number", "null"] },
+        "language": { "type": "string" },
+        "has_lyrics_input": { "type": "boolean" },
+        "lyrics_file_id": { "type": ["string", "null"] },
+        "upload_folder_id": { "type": "string" }
+      }
+    },
+
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demucs_model", "whisper_model", "video_template", "video_resolution",
+        "font", "highlight_color", "background_color", "guide_vocal", "guide_vocal_volume"
+      ],
+      "properties": {
+        "demucs_model": { "type": "string" },
+        "whisper_model": { "type": "string" },
+        "video_template": { "enum": ["classic", "modern", "neon"] },
+        "video_resolution": { "enum": ["720p", "1080p", "4k"] },
+        "font": { "type": "string" },
+        "highlight_color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "background_color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "guide_vocal": { "type": "boolean" },
+        "guide_vocal_volume": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_stage", "stages", "message", "worker_id", "started_at", "heartbeat_at"],
+      "properties": {
+        "current_stage": {
+          "enum": ["waiting", "audio_separation", "lyrics_alignment", "video_render", "done"]
+        },
+        "stages": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["audio_separation", "lyrics_alignment", "video_render"],
+          "properties": {
+            "audio_separation": { "$ref": "#/definitions/stageProgress" },
+            "lyrics_alignment": { "$ref": "#/definitions/stageProgress" },
+            "video_render": { "$ref": "#/definitions/stageProgress" }
+          }
+        },
+        "message": { "type": "string" },
+        "worker_id": { "type": ["string", "null"] },
+        "started_at": { "type": ["string", "null"], "format": "date-time" },
+        "heartbeat_at": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+
+    "checkpoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audio_separated", "lyrics_aligned", "video_rendered"],
+      "properties": {
+        "audio_separated": { "type": "boolean" },
+        "lyrics_aligned": { "type": "boolean" },
+        "video_rendered": { "type": "boolean" }
+      }
+    },
+
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_folder_id", "instrumental_file_id", "vocals_file_id",
+        "lyrics_json_file_id", "video_file_id"
+      ],
+      "properties": {
+        "output_folder_id": { "type": ["string", "null"] },
+        "instrumental_file_id": { "type": ["string", "null"] },
+        "vocals_file_id": { "type": ["string", "null"] },
+        "lyrics_json_file_id": { "type": ["string", "null"] },
+        "video_file_id": { "type": ["string", "null"] }
+      }
+    },
+
+    "error": { "type": ["string", "null"] }
+  },
+
+  "definitions": {
+    "stageProgress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "progress"],
+      "properties": {
+        "status": { "enum": ["pending", "running", "completed", "failed"] },
+        "progress": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    }
+  }
+}

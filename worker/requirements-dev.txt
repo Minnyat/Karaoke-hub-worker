@@ -1,0 +1,5 @@
+# Môi trường dev/test local (Windows/CI) — KHÔNG chứa lib GPU nặng.
+pytest==8.3.2
+Pillow==10.4.0
+numpy==1.26.4
+jsonschema==4.23.0

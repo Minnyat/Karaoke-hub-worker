@@ -1,0 +1,6 @@
+# Fixtures do INT so byte-for-byte với buildJobData (LF) — không cho autocrlf đổi CRLF.
+worker/tests/fixtures/*.json text eol=lf
+
+# Notebook + schema JSON giữ LF cho ổn định cross-platform.
+*.ipynb text eol=lf
+contracts/**/*.json text eol=lf

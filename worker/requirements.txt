@@ -1,0 +1,26 @@
+# Chạy trên Colab (Python 3.10, CUDA 12.1). KHÔNG cài trên máy dev — test phải mock.
+# Core ML
+torch==2.1.2
+torchaudio==2.1.2
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Audio Separation
+demucs==4.0.1
+
+# Speech Recognition (KHÔNG dùng openai-whisper)
+whisperx==3.1.6
+faster-whisper==1.0.3
+ctranslate2==4.4.0
+
+# Video
+Pillow==10.4.0
+numpy==1.26.4
+
+# Audio utils
+soundfile==0.12.1
+librosa==0.10.2
+pydub==0.25.1
+
+# System
+ffmpeg-python==0.2.0
+# FFmpeg binary cài bằng apt trong notebook, không phải pip

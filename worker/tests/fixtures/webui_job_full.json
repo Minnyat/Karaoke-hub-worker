@@ -1,0 +1,61 @@
+{
+  "id": "job_fu110n33",
+  "status": "pending",
+  "created_at": "2026-08-18T10:32:00.123Z",
+  "updated_at": "2026-08-18T10:32:00.123Z",
+  "attempts": 0,
+  "input": {
+    "audio_file_id": "1fullCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    "audio_filename": "track with spaces.flac",
+    "audio_duration": null,
+    "language": "en",
+    "has_lyrics_input": true,
+    "lyrics_file_id": "1fullLyricsEEEEEEEEEEEEEEEEEEEEEE",
+    "upload_folder_id": "1fullFolderDDDDDDDDDDDDDDDDDDDDDD"
+  },
+  "config": {
+    "demucs_model": "htdemucs",
+    "whisper_model": "medium",
+    "video_template": "neon",
+    "video_resolution": "4k",
+    "font": "Be Vietnam Pro",
+    "highlight_color": "#FF00AA",
+    "background_color": "#000000",
+    "guide_vocal": true,
+    "guide_vocal_volume": 0.85
+  },
+  "progress": {
+    "current_stage": "waiting",
+    "stages": {
+      "audio_separation": {
+        "status": "pending",
+        "progress": 0
+      },
+      "lyrics_alignment": {
+        "status": "pending",
+        "progress": 0
+      },
+      "video_render": {
+        "status": "pending",
+        "progress": 0
+      }
+    },
+    "message": "Đang chờ worker xử lý...",
+    "worker_id": null,
+    "started_at": null,
+    "heartbeat_at": null
+  },
+  "checkpoints": {
+    "audio_separated": false,
+    "lyrics_aligned": false,
+    "video_rendered": false
+  },
+  "output": {
+    "output_folder_id": null,
+    "instrumental_file_id": null,
+    "vocals_file_id": null,
+    "lyrics_json_file_id": null,
+    "video_file_id": null
+  },
+  "error": null
+}
