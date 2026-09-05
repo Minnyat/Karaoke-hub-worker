@@ -1,5 +1,7 @@
 # Môi trường dev/test local (Windows/CI) — KHÔNG chứa lib GPU nặng.
+# numpy/Pillow để dải trùng với requirements.txt: test render chạy trên cùng
+# thế hệ thư viện với Colab (numpy 2.x, Pillow 11.x).
 pytest==8.3.2
-Pillow==10.4.0
-numpy==1.26.4
-jsonschema==4.23.0
+Pillow>=11.0,<12
+numpy>=2.0,<3
+jsonschema>=4.23
